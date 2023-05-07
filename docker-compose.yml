@@ -1,0 +1,30 @@
+version: "3.4"
+
+services:
+  php:
+    build:
+      context: ./api
+      target: app_php
+    restart: unless-stopped
+    volumes:
+      - php_socket:/var/run/php
+    healthcheck:
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
+
+  nginx:
+    build:
+      context: ./api
+      target: app_nginx
+    depends_on:
+      - php
+    restart: unless-stopped
+    volumes:
+      - php_socket:/var/run/php
+    ports:
+      - "80:80"
+
+volumes:
+  php_socket:
