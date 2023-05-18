@@ -23,8 +23,12 @@ services:
     restart: unless-stopped
     volumes:
       - php_socket:/var/run/php
-    ports:
-      - "80:80"
+
+  node:
+    build:
+      context: ./front
+      target: app_node
+    restart: unless-stopped
 
 volumes:
   php_socket:

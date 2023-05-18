@@ -18,3 +18,13 @@ services:
     volumes:
       - ./api/public:/srv/app/public:ro
       - ./api/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8081:80"
+
+  node:
+    build:
+      target: app_node_dev
+    volumes:
+      - ./front:/srv/app
+    ports:
+      - "8080:3000"
