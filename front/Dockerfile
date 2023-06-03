@@ -4,8 +4,7 @@ FROM node:19-alpine AS app_node_builder
 
 WORKDIR /srv/app
 
-COPY package.json .
-COPY package-lock.json .
+COPY package*.json ./
 
 RUN npm install
 
